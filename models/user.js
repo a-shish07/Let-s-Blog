@@ -4,7 +4,7 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
       required: true,
     },
@@ -15,7 +15,7 @@ const userSchema = new Schema(
     },
     salt: {
       type: String,
-      required: true,
+    //   required: true,
     },
     password: {
       type: String,
@@ -49,6 +49,24 @@ userSchema.pre('save', function (next) {
 
     next();
 });
+
+userSchema.static('matchPassword' , async function (email, password) {
+    const user = await this.findOne({ email });
+    if(!user)  new Error('User not found!');
+
+    const salt = user.salt;
+    const hashedPassword = user.password;
+
+    const userProvidedHash = createHmac('sha256' , salt)
+                                .update(password)
+                                .digest('hex');
+
+    if(hashedPassword!==userProvidedHash)throw new Error('Incorrect Password');  
+
+    // if matched
+    return { user };
+
+})
 
 const User = model('user' , userSchema);
 
