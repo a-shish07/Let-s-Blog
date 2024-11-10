@@ -14,7 +14,7 @@ const PORT = 8000;
 
 mongoose.connect('mongodb://localhost:27017/blogy').then(e=>{
     console.log("MongoDB Connected");
-})
+});
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -22,7 +22,7 @@ app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(checkForAuthCookie("token"));
-app.use(express.static(path.resolve('./public')))
+app.use(express.static(path.resolve('./public')));
 
 app.get('/', async(req,res)=>{
     const allBlogs = await Blog.find({});

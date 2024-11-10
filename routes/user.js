@@ -9,11 +9,11 @@ router.get("/signin", (req, res) =>{
 
 router.get("/signup", (req, res) =>{
     return res.render("signup");
-})
+});
 
 router.get("/logout", (req, res)=>{
     res.clearCookie("token").redirect("/");
-})
+});;
 
 router.post("/signin", async (req, res) =>{
     const { email, password } = req.body;
@@ -26,7 +26,7 @@ router.post("/signin", async (req, res) =>{
         return res.render("signin", {
             error: "Incorrect Email or Password",
         });
-    }
+    };
     
 });
 
