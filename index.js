@@ -30,7 +30,7 @@ app.get('/', async(req,res)=>{
         user: req.user,
         blogs: allBlogs,
     });
-})
+});
 
 app.use("/user", userRoute);
 app.use("/blog", blogRoute);
@@ -38,4 +38,4 @@ app.use("/blog", blogRoute);
 
 app.listen(PORT, () =>{
     console.log(`Server started at PORT: ${PORT}`)
-})
+});
