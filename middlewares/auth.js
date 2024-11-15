@@ -11,6 +11,7 @@ function checkForAuthCookie(cookieName) {
             req.user = userPayLoad;
         } catch (error) {
         }
+        // call the next function
          return next();
         
     };
