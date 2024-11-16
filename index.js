@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require('path');
 const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// console.log(mongoose.Types.ObjectId.isValid('6738c592bbe31465586e77fe')); // Should return true
+
 const cookieParser = require('cookie-parser');
 
 const userRoute = require('./routes/user');

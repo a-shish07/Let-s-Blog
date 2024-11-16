@@ -24,6 +24,24 @@ router.get("/add-new", (req, res) =>{
     });
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+      const blog = await Blog.findById(req.params.id).populate("createdBy");
+      console.log("blog", blog);
+      if (!blog) {
+          return res.status(404).send("Blog not found");
+      }
+      return res.render('blog', {
+          user: req.user,
+          blog,
+      });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).send("Internal Server Error");
+  }
+});
+
+
 router.post("/",upload.single('coverImage'), async(req, res) =>{
     // console.log(req.body);
     // console.log(req.file);
